@@ -1,0 +1,22 @@
+<script>
+    import { Tabs, TabPanel, Tab } from '$lib/components/tabbar/tabs.js';
+	import Editor from '$lib/components/editor/Editor.svelte';
+	import Preview from '$lib/components/editor/Preview.svelte';
+
+    let quill;
+</script>
+
+<div class="my-14 container mx-auto">
+    <Tabs>
+        <div class="inline-block mx-auto">
+            <Tab>Edit</Tab>
+            <Tab>View</Tab>
+        </div>
+        <TabPanel>
+            <Editor bind:quill={quill} />
+        </TabPanel>
+        <TabPanel>
+            <Preview bind:quill={quill} />
+        </TabPanel>
+    </Tabs>
+</div>

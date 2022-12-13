@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    h1,h2,h3,h4,h5,h6 {
+        @apply font-serif;
+    }
+    @font-face {
+        font-family: 'atkinson-hyperlegible';
+        src: local('Atkinson Hyperlegible'), local('atkinson hyperlegible'), local('Atkinson-Hyperlegible'), local('atkinson-hyperlegible'), url('/fonts/atkinson-hyperlegible/Atkinson-Hyperlegible-Regular-102.otf');
+        font-weight: normal;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: 'atkinson-hyperlegible';
+        src: local('Atkinson Hyperlegible'), local('atkinson hyperlegible'), local('Atkinson-Hyperlegible'), local('atkinson-hyperlegible'), url('/fonts/atkinson-hyperlegible/Atkinson-Hyperlegible-Regular-102.otf');
+        font-weight: 500;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: 'atkinson-hyperlegible';
+        src: local('Atkinson Hyperlegible'), local('atkinson hyperlegible'), local('Atkinson-Hyperlegible'), local('atkinson-hyperlegible'), url('/fonts/atkinson-hyperlegible/Atkinson-Hyperlegible-Bold-102.otf');
+        font-weight: 600;
+        font-display: swap;
+    }
+
+
+    @font-face {
+        font-family: 'uncut-sans';
+        src: local('Uncut Sans'), local('uncut sans'), local('Uncut-Sans'), local('uncut-sans'), url('/fonts/uncut-sans/Uncut-Sans-Regular.otf');
+        font-weight: normal;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: 'uncut-sans';
+        src: local('Uncut Sans'), local('uncut sans'), local('Uncut-Sans'), local('uncut-sans'), url('/fonts/uncut-sans/Uncut-Sans-Medium.otf');
+        font-weight: 500;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: 'uncut-sans';
+        src: local('Uncut Sans'), local('uncut sans'), local('Uncut-Sans'), local('uncut-sans'), url('/fonts/uncut-sans/Uncut-Sans-Semibold.otf');
+        font-weight: 600;
+        font-display: swap;
+    }
+}
