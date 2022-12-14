@@ -1,0 +1,18 @@
+{
+    "organization": {
+        "name": "Dunef UG (haftungsbeschränkt)",
+        "email": "info@dunef.io",
+        "phone": "+49 171 8867 539",
+        "url": "https://dunef.io",
+        "address": {
+            "street": "Am Birkenhügel 19",
+            "city": "Stahnsdorf",
+            "zip": "14532",
+            "country": "Germany"
+        },
+        "reqistryCourt": "HRB Potsdam 32506",
+        "vatId": "DE 323 000 000",
+        "ceo": "Nick Westendorf"
+    },
+    "responsible_person": "Joseph Grabinger"
+}
