@@ -4,6 +4,10 @@
     import BlotFormatter from 'quill-blot-formatter';
 
     export let quill;
+    export let metaData = {
+        title: "",
+        author: "",
+    };
 	
     onMount( () => {
         Quill.register('modules/blotFormatter', BlotFormatter);
@@ -26,7 +30,15 @@
             theme: "snow"
         });
 
-        let form = document.querySelector('form');
+        const form = document.querySelector('form');
+
+        form.addEventListener('input', function() {
+            const formData = new FormData(form);
+            let json = Object.fromEntries(formData.entries())
+            metaData.title = json["title"];
+            metaData.author = json["author"];
+        });
+
         form.onsubmit = function() {
             console.log("submitting" + quill.root.innerHTML);
             // Populate hidden form on submit

@@ -4,6 +4,7 @@
 	import Preview from '$lib/components/editor/Preview.svelte';
 
     let quill;
+    let metaData;
 </script>
 
 <div class="my-14 container mx-auto">
@@ -13,10 +14,10 @@
             <Tab>View</Tab>
         </div>
         <TabPanel>
-            <Editor bind:quill={quill} />
+            <Editor bind:quill={quill} bind:metaData={metaData} />
         </TabPanel>
         <TabPanel>
-            <Preview bind:quill={quill} />
+            <Preview bind:quill={quill} bind:metaData={metaData} />
         </TabPanel>
     </Tabs>
 </div>

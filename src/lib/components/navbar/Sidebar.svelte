@@ -24,11 +24,11 @@
 
 <style>
 	aside {
-		right: -100%;
-		transition: right 0.3s ease-in-out;
+		left: -100%;
+		transition: left 0.3s ease-in-out;
 	}
 	
 	.open {
-		right: 0;
+		left: 0%;
 	}
 </style>
