@@ -3,7 +3,7 @@
 </script>
 
 <div>
-    <h1 class="text-3xl font-semibold">Imprint</h1>
+    <h1 class="text-3xl font-semibold pb-4">Imprint</h1>
     <p>{Config.organization.name}</p>
     <p>{Config.organization.address.street}</p>
     <p>{Config.organization.address.zip + " " + Config.organization.address.city}</p>
