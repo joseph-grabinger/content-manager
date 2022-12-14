@@ -7,7 +7,7 @@
     let metaData;
 </script>
 
-<div class="my-14 container mx-auto">
+<div class="container mx-auto">
     <Tabs>
         <div class="inline-block mx-auto">
             <Tab>Edit</Tab>

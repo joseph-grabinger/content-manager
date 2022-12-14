@@ -1,12 +1,12 @@
 <script>
     import '../app.css';
     import Navbar from '$lib/components/navbar/Navbar.svelte';
-    import Footer from '../lib/components/footer/Footer.svelte';
+    import Footer from '$lib/components/footer/Footer.svelte';
 </script>
 
 <Navbar/>
 
-<div class="h-screen py-10">
+<div class="h-screen bg-white my-4 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8">
     <slot />
     <Footer/>
 </div>
