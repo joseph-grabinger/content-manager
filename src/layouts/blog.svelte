@@ -28,7 +28,7 @@
 		Back
 	</span>
 	<h2 class="my-4 text-4xl font-semibold">{title}</h2>
-	<p class="my-4 text-gray-500">by {author}, {convertDate(date)}</p>
+	<p class="my-4 text-gray-500">by {author}, {date}</p>
 	<div class="prose prose-lg first-letter:text-3xl first-letter:text-blue-600">
 		<slot />
 	</div>

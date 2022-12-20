@@ -21,3 +21,11 @@ export const convertDate = (published) => {
     const [year, month, day] = date.split('-');
     return `${day}-${months[parseInt(month)]}-${year}`;
 };
+
+export const convertTitleToUrl = (title) => {
+    return title.toLowerCase().replace(/ /g, '-');
+}
+
+export const convertUrlToTitle = (url) => {
+    return url.replace(/-/g, ' ');
+}

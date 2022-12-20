@@ -9,7 +9,7 @@
     <div class="mt-12 grid gap-16 lg:grid-cols-3 lg:gap-x-5 lg:gap-y-12">
         {#each data.posts as post}
             <div class="border border-gray-200 p-4 rounded-lg flex flex-col justify-between">
-                <a href="/blog/{post.path}" sveltekit:prefetch>
+                <a href="/blog/{post.title}" sveltekit:preload>
                     <p class="text-xl text-gray-900">{post.title}</p>
                     <p class="mt-3 text-gray-500">{post.excerpt}</p>
                 </a>
@@ -18,7 +18,7 @@
                         {post.author}
                     </p>
                     <div class="text-sm text-gray-500">
-                        <time datetime="2020-03-16">{post.published}</time>
+                        <time datetime="2020-03-16">{post.date}</time>
                     </div>
                 </div>
             </div>
