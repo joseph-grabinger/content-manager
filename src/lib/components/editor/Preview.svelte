@@ -1,5 +1,5 @@
 <script>
-    import Blog from '$lib/components/blog/Blog.svelte';
+    import Blog from '$lib/layouts/Blog.svelte';
 
     export let quill;
     export let metaData;

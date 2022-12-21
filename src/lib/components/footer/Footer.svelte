@@ -20,9 +20,10 @@
     <div class="flex flex-col text-sm items-center">
         <span>Registry Court</span>
         <span>{Config.organization.reqistryCourt}</span>
-        <div class="mt-1 flex flex-row gap-x-4 underline underline-offset-2 text-sky-300 text-md">
+        <div class="mt-2 flex flex-row gap-x-4 underline underline-offset-2 text-sky-300 text-md">
             <a href="/imprint">Imprint</a>
             <a href="/privacy">Privacy</a>
         </div>
+        <a href="/admin" class="mt-2 underline underline-offset-2 text-sky-300">Admin</a>
     </div>
 </footer>
