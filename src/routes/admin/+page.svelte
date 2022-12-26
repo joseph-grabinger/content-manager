@@ -1,6 +1,6 @@
 <script>
     export let data;
-    console.log("Data: " + data.status);
+    console.log("User-Session: " + data.session);
 </script>
 
 <div class="max-w-lg mx-auto lg:max-w-7xl">

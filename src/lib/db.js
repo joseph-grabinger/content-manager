@@ -2,7 +2,22 @@ import Database from 'better-sqlite3';
 import fs from 'node:fs';
 import { v4 as uuidv4 } from 'uuid';
 
-export let db = new Database(fs.readFileSync("blog.db")); 
+let db = new Database(fs.readFileSync("blog.db")); 
+
+export let getPosts = () => {
+    const stmt = db.prepare("select * from BlogPost");
+    let posts = stmt.all();
+    posts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+    return Promise.resolve(posts);
+};
+
+export let getPost = (title) => {
+    const stmt = db.prepare("select * from BlogPost where title = ?");
+    let post = stmt.get(title);
+    if (!post) return Promise.resolve(null);
+
+    return Promise.resolve(post);
+};
 
 export const getUserByEmail = async (email) => {
     const stmt = db.prepare("select * from User where email = ?");
@@ -32,7 +47,6 @@ export const getSession = (id) => {
 };
 
 export const removeSession = (id) => {
-    // check if session exists
     const getStmt = db.prepare("select * from Session where id = ?");
     let session = stmt.get(id);
     if (!session) return Promise.resolve(new Error('Session not found'));

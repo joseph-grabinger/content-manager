@@ -1,51 +1,30 @@
 <script>
-	import { goto } from '$app/navigation';
-	// import { session } from '$app/stores';
-
-	let error;
-    let email = '';
-	let password = '';
-
-	async function handleSubmit() {
-		const response = await fetch('/api/login', {
-			method: 'POST',
-			body: JSON.stringify({ email, password }),
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		});
-		const body = await response.json();
-		if (response.ok) {
-			// session from getSession hook will otherwise not be set before navigation
-			// that would trigger redirect from /protected back to /sign-in
-			// $session = body;
-			await goto('/admin');
-		}
-		error = body.message;
-	}
+    export let form;
 </script>
+
 <div class="mx-auto">
     <h1 class="text-2xl font-semibold text-start">Admin Log-In</h1>
-    {#if error}
-        <p class="mt-3 text-red-500 text-center font-semibold">{error}</p>
-    {/if}
+    {#if form?.missing}<p class="error">Email and Password are required!</p>{/if}
+	{#if form?.incorrect}<p class="error">Enter a valid email and password.</p>{/if}
     <div id="form-container" class="container pt-4">
-        <form on:submit|preventDefault={handleSubmit} >
+        <form method="POST" action="?/login">
             <div class="form-group flex flex-col">
                 <label for="email" class="font-bold">Email</label>
-                <input class="form-control" name="email" type="email" bind:value={email} required />
+                <input name="email" type="email" value={form?.email ?? ''} required />
             </div>
             <div class="form-group flex flex-col">
                 <label for="password" class="font-bold">Password</label>
-                <input class="form-control" name="password" type="password" bind:value={password} required />
+                <input name="password" type="password" required />
             </div>
             <button class="btn btn-primary" type="submit">Log In</button>
-            
         </form>
     </div>
 </div>
 
 <style>
+    .error {
+        color: red;
+    }
     input {
         padding: 6px 12px;
         font-size: 16px;
