@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 let db = new Database(fs.readFileSync("blog.db")); 
 
+/** Returns all posts from the DB, sorted by date. */
 export let getPosts = () => {
     const stmt = db.prepare("select * from BlogPost");
     let posts = stmt.all();
@@ -11,6 +12,10 @@ export let getPosts = () => {
     return Promise.resolve(posts);
 };
 
+/** Returns a sigle post from the DB.
+ * If no post is found, null is returned.
+ * @param {string} title
+ */
 export let getPost = (title) => {
     const stmt = db.prepare("select * from BlogPost where title = ?");
     let post = stmt.get(title);
@@ -19,6 +24,10 @@ export let getPost = (title) => {
     return Promise.resolve(post);
 };
 
+/** Returns a sigle user from the DB.
+ * If no user is found, null is returned.
+ * @param {string} email 
+ */
 export const getUserByEmail = async (email) => {
     const stmt = db.prepare("select * from User where email = ?");
     let user = stmt.get(email);
@@ -27,6 +36,10 @@ export const getUserByEmail = async (email) => {
     return Promise.resolve(user);
 };
 
+/** Creates a new session for a user in the DB. 
+ * Returns the session object.
+ * @param {string} email 
+ */
 export const createSession = (email) => {
     const session = {
         id: uuidv4(),
@@ -38,6 +51,10 @@ export const createSession = (email) => {
     return Promise.resolve(session);
 };
 
+/** Returns a sigle session from the DB.
+ * If no session is found, null is returned.
+ * @param {string} id
+ */
 export const getSession = (id) => {
     const stmt = db.prepare("select * from Session where id = ?");
     let session = stmt.get(id);
@@ -46,6 +63,10 @@ export const getSession = (id) => {
     return Promise.resolve(session);
 };
 
+/** Removes a session from the DB.
+ * If no session is found, an error is returned.
+ * @param {string} id
+ */
 export const removeSession = (id) => {
     const getStmt = db.prepare("select * from Session where id = ?");
     let session = stmt.get(id);
