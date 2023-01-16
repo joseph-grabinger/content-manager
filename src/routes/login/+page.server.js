@@ -30,17 +30,4 @@ export const actions = {
         });
         throw redirect(307, '/admin');
     },
-    logout: async ({ cookies }) => {
-        if (cookies.session) {
-            await removeSession(cookies.session);
-            cookies.set('session', '', {
-                path: '/',
-                httpOnly: true,
-                sameSite: 'strict',
-                secure: !dev,
-                maxAge: 0
-            });
-        }
-        throw redirect(307, '/admin');
-    }
 };

@@ -1,5 +1,6 @@
 import { redirect } from '@sveltejs/kit';
-import { getSession, getPosts } from '$lib/db';
+import { dev } from '$app/environment';
+import { getSession, removeSession, getPosts, getUserByEmail } from '$lib/db';
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load(event) {
@@ -8,18 +9,38 @@ export async function load(event) {
         throw redirect(302, '/login');
     }
 
-    const dbSession = getSession(session);
+    const dbSession = await getSession(session);
     if (!dbSession) {
         throw redirect(302, '/login');
     }
 
     const posts = getPosts();
     console.log("Total posts : " + posts.length);
-
     // posts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    const user = await getUserByEmail(dbSession['email']);
 
     return { 
         posts : posts, 
-        session: session 
+        session: session,
+        userName: user.name,
     };
 }
+
+export const actions = {
+    logout: async ({ cookies }) => {
+        const session = cookies.get('session');
+        console.log("Logout: ", session);
+        if (session) {
+            await removeSession(cookies.session);
+            cookies.set('session', '', {
+                path: '/',
+                httpOnly: true,
+                sameSite: 'strict',
+                secure: !dev,
+                maxAge: 0
+            });
+        }
+        throw redirect(307, '/login');
+    }
+};

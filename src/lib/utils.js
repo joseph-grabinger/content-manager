@@ -29,3 +29,8 @@ export const convertTitleToUrl = (title) => {
 export const convertUrlToTitle = (url) => {
     return url.replace(/-/g, ' ');
 }
+
+export const convertNameToInitials = (name) => {
+    const [firstName, lastName] = name.split(' ');
+    return `${firstName[0]}${lastName[0]}`;
+}

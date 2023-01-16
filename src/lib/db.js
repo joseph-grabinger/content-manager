@@ -69,11 +69,11 @@ export const getSession = (id) => {
  */
 export const removeSession = (id) => {
     const getStmt = db.prepare("select * from Session where id = ?");
-    let session = stmt.get(id);
+    let session = getStmt.get(id);
     if (!session) return Promise.resolve(new Error('Session not found'));
 
     const delStmt = db.prepare("delete from Session where id = ?");
-    stmt.run(id);
+    delStmt.run(id);
 
     return Promise.resolve(session);
 }
