@@ -1,8 +1,18 @@
 <script>
+    import { getContext } from 'svelte';
+	import { TABS } from './Tabs.svelte';
+
 	export let value = true;
     export let options = ["on", "off"];
 
     const uniqueID = Math.floor(Math.random() * 100);
+
+    const tab1 = {};
+    const tab2 = {};
+	const { registerTab, selectTab } = getContext(TABS);
+
+	registerTab(tab1);
+    registerTab(tab2);
 
     function handleClick(event){
         const target = event.target
@@ -20,7 +30,8 @@
         role="switch"
         aria-checked={value}
         aria-labelledby={`switch-${uniqueID}`}
-        on:click={handleClick}>
+        on:click={handleClick}
+        on:click={() => selectTab(value ? tab1 : tab2)}>
             <span>{options[0]}</span>
             <span>{options[1]}</span>
     </button>
