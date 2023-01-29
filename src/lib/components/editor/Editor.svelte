@@ -1,7 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
 	import Quill from 'quill';
-    import BlotFormatter from 'quill-blot-formatter';
+    import BlotFormatter2 from 'quill-blot-formatter';
 
     export let quill;
     export let metaData = {
@@ -10,7 +10,8 @@
     };
 	
     onMount( () => {
-        Quill.register('modules/blotFormatter', BlotFormatter);
+        console.log("onMount, quill: ", quill);
+        Quill.register('modules/blotFormatter', BlotFormatter2);
         quill = new Quill('#editor-container', {
             modules: {
                 toolbar: [
@@ -114,11 +115,11 @@
         <div class="flex col-1 gap-6">
             <div class="form-group flex flex-col grow">
                 <label for="title" class="font-bold">Title</label>
-                <input class="form-control" name="title" type="text" value="Lorem ipsum">
+                <input class="form-control" name="title" type="text" value={metaData.title}>
             </div>
             <div class="form-group flex flex-col grow-0">
                 <label for="author" class="font-bold">Author</label>
-                <input class="form-control"  name="author" type="text" value="Maxime Mustermann">
+                <input class="form-control"  name="author" type="text" value={metaData.author}>
             </div>
         </div>
         <div class="form-group pt-4">
