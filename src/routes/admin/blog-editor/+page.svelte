@@ -17,7 +17,7 @@
             <Editor bind:quill={quill} bind:metaData={metaData} />
         </TabPanel>
         <TabPanel>
-            <Preview bind:quill={quill} bind:metaData={metaData} />
+            <Preview quill={quill} metaData={metaData} />
         </TabPanel>
     </Tabs>
 </div>

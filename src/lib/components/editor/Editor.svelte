@@ -8,9 +8,10 @@
         title: "",
         author: "",
     };
+
+    $: content = quill ? quill.root.innerHTML : "<p><br></p>";
 	
     onMount( () => {
-        console.log("onMount, quill: ", quill);
         Quill.register('modules/blotFormatter', BlotFormatter2);
         quill = new Quill('#editor-container', {
             modules: {
@@ -30,7 +31,7 @@
             placeholder: "Type your blog content here...",
             theme: "snow"
         });
-
+        
         const form = document.querySelector('form');
 
         form.addEventListener('input', function() {
@@ -81,6 +82,7 @@
 
     #editor-container {
         height: 375px;
+        overflow-y: scroll;
     }
 
     .btn {
@@ -127,10 +129,7 @@
             <input type="hidden" name="content">
             <div id="toolbar-container"></div>
             <div id="editor-container" class="rounded-b-lg">
-                {#if quill}
-                {@html quill.root.innerHTML}
-                {/if}
-                <!-- initial data here -->
+                {@html content}
             </div>
         </div>
         <button class="btn btn-primary" type="submit">Save Post</button>
