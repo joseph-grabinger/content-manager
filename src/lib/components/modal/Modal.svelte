@@ -29,8 +29,6 @@
         <div class="pt-6">
             <slot />
         </div>
-		<!-- <hr class="my-1" /> -->
-		
 	</div>
 </dialog>
 

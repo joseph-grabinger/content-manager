@@ -11,7 +11,7 @@
 
 <div class="max-w-lg mx-auto lg:max-w-7xl">
     <h2 class="pt-3 border-b border-b-gray-200 pb-2 text-3xl tracking-tight font-semibold text-gray-900 sm:text-4xl">Account Settings</h2>
-    <div class="flex justify-between pt-4">
+    <div class="flex justify-between pt-10">
         <div class="flex">
             <div class="avatar">{convertNameToInitials(data.user.name)}</div>
             <div class="flex flex-col justify-center px-4">
@@ -30,7 +30,7 @@
             <span class="py-2 text-ml font-semibold">Admin</span>
         </div>
     </div>
-    <div class="flex justify-evenly">
+    <div class="flex justify-evenly py-6">
         <button 
             class="mt-8 inline-flex justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
             on:click={() => (showEmailModal = true)}>
@@ -74,13 +74,7 @@
             <label class="text-gray-600 text-sm" for="newEmail">New Email</label>
             <input type="email" id="newEmail" name="newEmail" required>
         </div>
-        <button 
-            type="submit"
-            class="btn"
-            onclick="validateSignupForm()">
-            <span>Continue</span>
-            <span id="loader"></span>
-        </button>
+        <button type="submit" class="btn">Continue</button>
     </form>
 </Modal>
 
@@ -100,13 +94,7 @@
             <label class="text-gray-600 text-sm" for="confirmPassword">Confirm Password</label>
             <input type="password" id="confirmPassword" name="confirmPassword" required>
         </div>
-        <button 
-            type="submit"
-            class="btn"
-            onclick="validateSignupForm()">
-            <span>Continue</span>
-            <span id="loader"></span>
-        </button>
+        <button type="submit" class="btn">Continue</button>
     </form>
 </Modal>
 
