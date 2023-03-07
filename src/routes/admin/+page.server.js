@@ -23,7 +23,10 @@ export async function load(event) {
     return { 
         posts : posts, 
         session: session,
-        userName: user.name,
+        user: {
+            email: user.email,
+            name: user.name,
+        },
     };
 }
 
