@@ -18,7 +18,8 @@ export const actions = {
         const user = await getUserByEmail(email);
         const passwordMatch = user && (await bcrypt.compare(password, user.password));
 
-        if (!user || !passwordMatch) return invalid(400, { email, incorrect: true });
+        if (!user || !passwordMatch) 
+            return invalid(400, { email, incorrect: true });
 
         const { id } = await createSession(email);
         cookies.set('session', id, {

@@ -61,7 +61,7 @@
 <Modal bind:showModal={showEmailModal}>
     <h2 slot="header">Change Email</h2>
 
-	<form method="POST" action="?/changePassword">
+	<form method="POST" action="?/changeEmail">
         <div class="form-group flex flex-col">
             <label class="text-gray-600 text-sm" for="email">Email</label>
             <input name="email" type="email" value={form?.email ?? ''} required />
@@ -71,8 +71,8 @@
             <input type="password" id="password" name="password" required>
         </div>
         <div class="form-group flex flex-col grow-0">
-            <label class="text-gray-600 text-sm" for="new-email">New Email</label>
-            <input type="email" id="new-email" name="new-email" required>
+            <label class="text-gray-600 text-sm" for="newEmail">New Email</label>
+            <input type="email" id="newEmail" name="newEmail" required>
         </div>
         <button 
             type="submit"
@@ -89,16 +89,16 @@
 
     <form method="POST" action="?/changePassword">
         <div class="form-group flex flex-col grow-0">
-            <label class="text-gray-600 text-sm" for="old-password">Old Password</label>
-            <input type="password" id="old-password" name="old-password" required>
+            <label class="text-gray-600 text-sm" for="oldPassword">Old Password</label>
+            <input type="password" id="oldPassword" name="oldPassword" required>
         </div>
         <div class="form-group flex flex-col grow-0">
-            <label class="text-gray-600 text-sm" for="new-password">New Password</label>
-            <input type="password" id="new-password" name="new-password" required>
+            <label class="text-gray-600 text-sm" for="newPassword">New Password</label>
+            <input type="password" id="newPassword" name="newPassword" required>
         </div>
         <div class="form-group flex flex-col grow-0">
-            <label class="text-gray-600 text-sm" for="confirm-password">Confirm Password</label>
-            <input type="password" id="confirm-password" name="confirm-password" required>
+            <label class="text-gray-600 text-sm" for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required>
         </div>
         <button 
             type="submit"

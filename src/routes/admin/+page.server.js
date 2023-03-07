@@ -35,7 +35,7 @@ export const actions = {
         const session = cookies.get('session');
         console.log("Logout: ", session);
         if (session) {
-            await removeSession(cookies.session);
+            await removeSession(session);
             cookies.set('session', '', {
                 path: '/',
                 httpOnly: true,

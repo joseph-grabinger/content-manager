@@ -28,10 +28,36 @@ export let getPost = (title) => {
  * If no user is found, null is returned.
  * @param {string} email 
  */
-export const getUserByEmail = async (email) => {
+export const getUserByEmail = (email) => {
     const stmt = db.prepare("select * from User where email = ?");
     let user = stmt.get(email);
     if (!user) return Promise.resolve(null);
+
+    return Promise.resolve(user);
+};
+
+/** Updates a users email in the DB.
+ *  If no user is found, an error is returned.
+ * @param {string} email
+ * @param {string} newEmail
+ */
+export const updateUserEmail = (email, newEmail) => {
+    const stmt = db.prepare("update User set email = ? where email = ?");
+    let user = stmt.run(newEmail, email);
+    if (!user) return Promise.reject(new Error("User not found"));
+
+    return Promise.resolve(user);
+};
+
+/** Updates a users password in the DB.
+ * If no user is found, an error is returned.
+ * @param {string} email
+ * @param {string} password
+ */
+export const updateUserPassword = (email, password) => {
+    const stmt = db.prepare("update User set password = ? where email = ?");
+    let user = stmt.run(password, email);
+    if (!user) return Promise.reject(new Error("User not found"));
 
     return Promise.resolve(user);
 };
@@ -70,7 +96,7 @@ export const getSession = (id) => {
 export const removeSession = (id) => {
     const getStmt = db.prepare("select * from Session where id = ?");
     let session = getStmt.get(id);
-    if (!session) return Promise.resolve(new Error('Session not found'));
+    if (!session) return Promise.reject(new Error('Session not found'));
 
     const delStmt = db.prepare("delete from Session where id = ?");
     delStmt.run(id);
