@@ -2,7 +2,6 @@ import Database from 'better-sqlite3';
 import { migrate } from '@blackglory/better-sqlite3-migrations';
 import fs from 'node:fs';
 
-console.log("Running migrations");
 
 const migrations = [
     {
@@ -10,14 +9,16 @@ const migrations = [
         up: `
             create table if not exists BlogPost (
                 id integer primary key autoincrement,
-                title text not null,
+                author text not null,
+                title text not null unique,
                 date text not null,
                 content text not null
             );
 
             create table if not exists User (
                 id integer primary key autoincrement,
-                email text not null,
+                name text not null,
+                email text not null unique,
                 password text not null
             );
 
@@ -36,8 +37,16 @@ const migrations = [
     },
 ];
 
-let db = new Database(fs.readFileSync("../../test.db"));
+const path = "dev.db";
 
-migrate(db, migrations, 1);
+if (!fs.existsSync(path)) {
+    fs.writeFileSync(path, "");
+}
 
-db.backup("../../test.db");
+let db = new Database(fs.readFileSync(path));
+
+migrate(db, migrations);
+
+await db.backup(path);
+
+process.exit(0);
