@@ -4,11 +4,27 @@ import { v4 as uuidv4 } from 'uuid';
 
 let db = new Database(fs.readFileSync("blog.db")); 
 
+/** Creates a new post in the DB. 
+ * Returns the post object.
+ * @param {string} author
+ * @param {string} title
+ * @param {string} date
+ * @param {string} excerpt
+ * @param {string} content
+ */
+export let createPost = (author, title, date, excerpt, content) => {
+    const stmt = db.prepare("insert into BlogPost (author, title, date, excerpt, content) values (?, ?, ?, ?, ?)");
+    let post = stmt.run(author, title, date, excerpt, content);
+
+    return Promise.resolve(post);
+};
+
 /** Returns all posts from the DB, sorted by date. */
 export let getPosts = () => {
     const stmt = db.prepare("select * from BlogPost");
     let posts = stmt.all();
     posts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
     return Promise.resolve(posts);
 };
 

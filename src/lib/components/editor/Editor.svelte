@@ -1,5 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
+    import { enhance } from '$app/forms';
 	import Quill from 'quill';
     import BlotFormatter2 from 'quill-blot-formatter';
 
@@ -10,7 +11,7 @@
     };
 
     $: content = quill ? quill.root.innerHTML : "<p><br></p>";
-	
+
     onMount( () => {
         Quill.register('modules/blotFormatter', BlotFormatter2);
         quill = new Quill('#editor-container', {
@@ -24,14 +25,12 @@
                     ["link", "image", "video", "code-block", "blockquote"],
                     ['clean'],
                 ],
-                blotFormatter: {
-                    // see config options below
-                }
+                blotFormatter: {},
             },
             placeholder: "Type your blog content here...",
             theme: "snow"
         });
-        
+
         const form = document.querySelector('form');
 
         form.addEventListener('input', function() {
@@ -40,18 +39,6 @@
             metaData.title = json["title"];
             metaData.author = json["author"];
         });
-
-        form.onsubmit = function() {
-            console.log("submitting" + quill.root.innerHTML);
-            // Populate hidden form on submit
-            const formData = new FormData(form);
-            let json = Object.fromEntries(formData.entries())
-            json["content"] = JSON.stringify(quill.getContents());
-            // No back end to actually submit to!
-            console.log(json);
-            alert('Open the console to see the submit data!')
-            return false;
-        };
 
         var toolbar = quill.getModule('toolbar');
         toolbar.container.style.borderRadius = "4px 4px 0px 0px";
@@ -113,7 +100,12 @@
 </svelte:head>
 
 <div id="form-container" class="container pt-4">
-    <form>
+    <form
+        method="POST" 
+        action="?/createPost"
+        use:enhance={({ form, data, action, cancel }) => {
+            data.set('content', quill.root.innerHTML)
+        }}>
         <div class="flex col-1 gap-6">
             <div class="form-group flex flex-col grow">
                 <label for="title" class="font-bold">Title</label>

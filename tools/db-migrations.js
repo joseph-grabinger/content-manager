@@ -37,6 +37,8 @@ const migrations = [
     },
 ];
 
+// TODO: add excerpt to BlogPost
+
 const path = "dev.db";
 
 if (!fs.existsSync(path)) {
