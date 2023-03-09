@@ -44,6 +44,6 @@ export const actions = {
                 maxAge: 0
             });
         }
-        throw redirect(307, '/login');
+        throw redirect(303, '/login');
     }
 };

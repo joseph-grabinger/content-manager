@@ -29,6 +29,6 @@ export const actions = {
             secure: !dev,
             maxAge: 60 * 60 * 24 // 1 day
         });
-        throw redirect(307, '/admin');
+        throw redirect(303, '/admin');
     },
 };
