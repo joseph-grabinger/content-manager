@@ -11,6 +11,7 @@ const migrations = [
                 id integer primary key autoincrement,
                 author text not null,
                 title text not null unique,
+                excerpt text,
                 date text not null,
                 content text not null
             );
@@ -36,8 +37,6 @@ const migrations = [
         `,
     },
 ];
-
-// TODO: add excerpt to BlogPost
 
 const path = "dev.db";
 
