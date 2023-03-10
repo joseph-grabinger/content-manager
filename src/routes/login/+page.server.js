@@ -1,4 +1,4 @@
-import { invalid, redirect } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 import { dev } from '$app/environment';
 import * as bcrypt from 'bcrypt';
 import { createSession, getUserByEmail } from '$lib/db';
@@ -10,16 +10,16 @@ export const actions = {
         const email = form.get('email');
         const password = form.get('password');
 
-        if (!email || !password) return invalid(400, { email, missing: true });
+        if (!email || !password) return fail(400, { email, missing: true });
 
         if (typeof email !== 'string' || typeof password !== 'string')
-            return invalid(400, { email, incorrect: true });
+            return fail(400, { email, incorrect: true });
 
         const user = await getUserByEmail(email);
         const passwordMatch = user && (await bcrypt.compare(password, user.password));
 
         if (!user || !passwordMatch) 
-            return invalid(400, { email, incorrect: true });
+            return fail(400, { email, incorrect: true });
 
         const { id } = await createSession(email);
         cookies.set('session', id, {

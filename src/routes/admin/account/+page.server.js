@@ -1,4 +1,4 @@
-import { invalid, redirect } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 import { dev } from '$app/environment';
 import * as bcrypt from 'bcrypt';
 import { getUserByEmail, updateUserEmail, updateUserPassword, getSession, removeSession, createSession } from '$lib/db';
@@ -35,17 +35,17 @@ export const actions = {
         const newEmail = form.get('newEmail');
 
         if (!email || !password || !newEmail) 
-            return invalid(400, { email, missing: true });
+            return fail(400, { email, missing: true });
 
         if (typeof email !== 'string' || typeof password !== 'string'
             || typeof newEmail !== 'string')
-            return invalid(400, { email, incorrect: true });
+            return fail(400, { email, incorrect: true });
 
         const user = await getUserByEmail(email);
         const passwordMatch = user && (await bcrypt.compare(password, user.password));
 
         if (!user || !passwordMatch)
-            return invalid(400, { email, incorrect: true });
+            return fail(400, { email, incorrect: true });
 
         await updateUserEmail(email, newEmail);
 
@@ -72,11 +72,11 @@ export const actions = {
         const confirmPassword = form.get('confirmPassword');
 
         if (!oldPassword || !newPassword || !confirmPassword) 
-            return invalid(400, { newPassword, missing: true });
+            return fail(400, { newPassword, missing: true });
 
         if (typeof oldPassword !== 'string' || typeof newPassword !== 'string'
             || typeof confirmPassword !== 'string' || newPassword !== confirmPassword)
-            return invalid(400, { newPassword, incorrect: true });
+            return fail(400, { newPassword, incorrect: true });
         
         const session = cookies.get('session');
 
@@ -90,7 +90,7 @@ export const actions = {
         const passwordMatch = user && (await bcrypt.compare(oldPassword, user.password));
 
         if (!user || !passwordMatch)
-            return invalid(400, { newPassword, incorrect: true });
+            return fail(400, { newPassword, incorrect: true });
         
         const salt = await bcrypt.genSalt(10);
         const hash = await bcrypt.hash(newPassword, salt);
