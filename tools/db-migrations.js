@@ -16,6 +16,16 @@ const migrations = [
                 content text not null
             );
 
+            create table if not exists News (
+                id integer primary key autoincrement,
+                author text not null,
+                title text not null unique,
+                excerpt text,
+                date text not null,
+                content text not null,
+                thumbnail text
+            );
+
             create table if not exists User (
                 id integer primary key autoincrement,
                 name text not null,

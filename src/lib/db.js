@@ -2,7 +2,7 @@ import Database from 'better-sqlite3';
 import fs from 'node:fs';
 import { v4 as uuidv4 } from 'uuid';
 
-let db = new Database(fs.readFileSync("blog.db")); 
+let db = new Database(fs.readFileSync("dev.db")); 
 
 /** Creates a new post in the DB. 
  * Returns the post object.
@@ -38,6 +38,40 @@ export let getPost = (title) => {
     if (!post) return Promise.resolve(null);
 
     return Promise.resolve(post);
+};
+
+/** Creates a new news in the DB. 
+ * Returns the news object.
+ * @param {string} author
+ * @param {string} title
+ * @param {string} date
+ * @param {string} excerpt
+ * @param {string} content
+ * @param {string} thumbnail
+ */
+export let createNews = (author, title, date, excerpt, content, thumbnail) => {
+    const stmt = db.prepare("insert into News (author, title, date, excerpt, content, thumbnail) values (?, ?, ?, ?, ?, ?)");
+    let post = stmt.run(author, title, date, excerpt, content, thumbnail);
+
+    return Promise.resolve(post);
+};
+
+/** Returns all news from the DB. */
+export let getNews = () => {
+    const stmt = db.prepare("select * from News");
+    let news = stmt.all();
+    news = news.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    return Promise.resolve(news);
+};
+
+/** Returns a sigle news from the DB. */
+export let getNewsStory = (title) => {
+    const stmt = db.prepare("select * from News where title = ?");
+    let news = stmt.get(title);
+    if (!news) return Promise.resolve(null);
+
+    return Promise.resolve(news);
 };
 
 /** Returns a sigle user from the DB.
