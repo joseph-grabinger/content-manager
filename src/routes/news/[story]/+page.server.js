@@ -1,14 +1,12 @@
 import { error } from '@sveltejs/kit';
-import { getPost } from '$lib/db';
+import { getNewsStory } from '$lib/db';
 
 /** @type {import('./$types').PageLoad} */
 export async function load({ params }) {
-    console.log('params', params);
-
-    const post = getPost(params.post);
-    if (!post) {
+    const news = getNewsStory(params.stroy);
+    if (!news) {
         throw error(404, 'Not found');
     }
 
-    return { post };
+    return { news };
 }
