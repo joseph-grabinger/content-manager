@@ -1,6 +1,6 @@
 import { redirect } from '@sveltejs/kit';
 import { dev } from '$app/environment';
-import { getSession, removeSession, getPosts, getUserByEmail } from '$lib/db';
+import { getSession, removeSession, getPosts, getNews, getUserByEmail } from '$lib/db';
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load(event) {
@@ -15,13 +15,13 @@ export async function load(event) {
     }
 
     const posts = getPosts();
-    console.log("Total posts : " + posts.length);
-    // posts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+    const news = getNews();
 
     const user = await getUserByEmail(dbSession['email']);
 
     return { 
-        posts : posts, 
+        posts : posts,
+        news : news,
         session: session,
         user: {
             email: user.email,

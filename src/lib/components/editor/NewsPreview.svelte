@@ -1,5 +1,5 @@
 <script>
-    import Blog from '$lib/layouts/Blog.svelte';
+    import News from '$lib/layouts/News.svelte';
 
     export let quill;
     export let metaData;
@@ -10,7 +10,11 @@
 </script>
 
 
-<Blog bind:title={metaData.title} bind:author={metaData.author} bind:date={today}>
+<News
+    bind:title={metaData.title}
+    bind:author={metaData.author}
+    bind:date={today}
+    bind:thumbnail={metaData.thumbnail}>
     <div class="my-4 mx-auto">
         {#if content === "<p><br></p>"}
             <p class="text-gray-500">Nothing to preview</p>
@@ -18,4 +22,4 @@
             {@html content}
         {/if}
     </div>
-</Blog>
+</News>

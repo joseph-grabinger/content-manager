@@ -1,7 +1,7 @@
 <script>
     import { Tabs, TabPanel, Tab } from '$lib/components/tabbar/tabs.js';
-	import BlogEditor from '$lib/components/editor/BlogEditor.svelte';
-	import BlogPreview from '$lib/components/editor/BlogPreview.svelte';
+	import NewsEditor from '$lib/components/editor/EdiNewsEditortor.svelte';
+	import NewsPreview from '$lib/components/editor/NewsPreview.svelte';
 
     let quill;
     let metaData;
@@ -14,10 +14,10 @@
             <Tab>View</Tab>
         </div>
         <TabPanel>
-            <BlogEditor bind:quill={quill} bind:metaData={metaData} />
+            <NewsEditor bind:quill={quill} bind:metaData={metaData} />
         </TabPanel>
         <TabPanel>
-            <BlogPreview quill={quill} metaData={metaData} />
+            <NewsPreview quill={quill} metaData={metaData} />
         </TabPanel>
     </Tabs>
 </div>

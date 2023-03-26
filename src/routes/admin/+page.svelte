@@ -160,7 +160,49 @@
             </div>
         </TabPanel>
         <TabPanel>
-            <h2>To be done!</h2>
+            <div class="mt-12 grid gap-16 lg:grid-cols-3 lg:gap-x-5 lg:gap-y-12">
+                {#each data.news as stroy}
+                    <div class="border border-gray-200 p-4 rounded-lg flex flex-col justify-between"
+                        id="post">
+                        <div>
+                            <a href="/news/{stroy.title}" sveltekit:preload>
+                            <p class="text-xl text-gray-900">{stroy.title}</p>
+                            <p class="mt-3 text-gray-500">{stroy.excerpt}</p>
+                        </div>
+                        <div class="flex justify-between">
+                            <div class="mt-6">
+                                <p class="text-sm font-medium text-gray-900">
+                                    {stroy.author}
+                                </p>
+                                <div class="text-sm text-gray-500">
+                                    <time datetime="2020-03-16">{stroy.date}</time>
+                                </div>
+                            </div>
+                            <button class="edit">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                        width="35px"
+                                        height="35px"
+                                        viewBox="0 0 24 24">
+                                        <title>Edit Story</title>
+                                        <path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
+                                    </svg>
+                            </button>
+                        </div>
+                    </div>
+                {/each}
+                <div class="border border-gray-200 p-4 rounded-lg flex flex-col justify-between">
+                    <a href="/admin/blog-editor" sveltekit:preload>
+                    <p class="text-xl text-gray-900">Add a new Story</p>
+                    <svg class="block m-auto mt-4"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="55px"
+                        height="55px"
+                        viewBox="0 0 24 24">
+                        <title>New Story</title>
+                        <path fill="#87CEEB" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+                    </svg>
+                </div>
+            </div>
         </TabPanel>
     </Tabs>
 </div>
